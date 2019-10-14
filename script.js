@@ -3,6 +3,7 @@
 function getDogImage(){
   $('#dog-form').submit(function(event){
     event.preventDefault();
+    clearDOM();
     let breed = $('.breed-entry').val();
     fetch('https://dog.ceo/api/breed/'+ breed +'/images/random')
       .then(response => response.json())
@@ -17,6 +18,10 @@ function displayResults(responseJson){
         `<img src="${responseJson.message}" class="results-img">` 
     )
     $('.results').removeClass('hidden');
+}
+
+function clearDOM() {
+  $('.dog').empty();
 }
 
 function watchForm() {
