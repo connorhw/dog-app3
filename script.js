@@ -5,10 +5,16 @@ function getDogImage(){
     event.preventDefault();
     clearDOM();
     let breed = $('.breed-entry').val();
+    console.log(breed);
     fetch('https://dog.ceo/api/breed/'+ breed +'/images/random')
       .then(response => response.json())
-      .then(responseJson => displayResults(responseJson))
-      .catch(error => alert('Something went wrong. Try again, please.'))
+      .then(responseJson => { 
+        if (responseJson.code === 404) {
+          alert("Try again...");
+        }else{
+          displayResults(responseJson);
+        }
+      })
   });
 }
 
